@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useDebounce } from './utilities';
 import axios from 'axios';
-import './App.scss';
+import './scss/App.scss';
 
 import { render } from "react-dom";
 import {
@@ -9,6 +9,8 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 function App() {
@@ -22,15 +24,18 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <aside className={sidebarStyles}>
-          <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">Link1</a></li>
-            <li><a href="">Link2</a></li>
-          </ul>
-        </aside>
-        <div className={overlayStyles} onClick={() => setMenuOpen(!menuOpen)}></div>
-        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>Hamburger</button>
+        <section className="header">
+          <h1 className="header__heading">Movie Database</h1>
+          <aside className="menu" className={sidebarStyles}>
+            <ul className="menu__list">
+              <li className="menu__item"><a className="menu__link" href="">Home</a></li>
+              <li className="menu__item"><a className="menu__link" href="">Link1</a></li>
+              <li className="menu__item"><a className="menu__link" href="">Link2</a></li>
+            </ul>
+          </aside>
+          <div className={overlayStyles} onClick={() => setMenuOpen(!menuOpen)}></div>
+          <button className="toggle" onClick={() => setMenuOpen(!menuOpen)}><FontAwesomeIcon className="toggle__bars" icon="bars" /></button>
+        </section>
         <Routes>
           <Route path="/" element={<SearchApp />} />
           <Route path="/link-1" element={<Link1Page />} />
@@ -60,6 +65,7 @@ const SearchApp = () => {
 
   const [searchTerm, setSearchTerm ] = useState('')
   const [results, setResults] = useState([])
+
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
 
   const apiKey = apiStuff.key;
@@ -101,23 +107,31 @@ const SearchApp = () => {
     }
   }, [debouncedSearchTerm, url])
 
+
+
   return (
-    <div>
-      <h1>My movie searching app</h1>
-      <button onClick={() => sortMovies(results, 'asc')}>Sort ASC</button>
-      <button onClick={() => sortMovies(results, 'desc')}>Sort DESC</button>
-      <input type="text" 
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      {results.map((result) => (
-        <figure key={result.id}>
-            {result.poster_path ? <img src={`https://image.tmdb.org/t/p/w200/${result.poster_path}`} alt={result.title} /> : null}
-            <figcaption>{result.title}</figcaption>
-        </figure>
-      )
-      )}
-    </div>
+    <main className="search-block">
+      <section className="search">
+        {/* <button className="results__sort-button results__sort-button_asc" onClick={() => sortMovies(results, 'asc')}>Sort ASC</button>
+        <button className="results__sort-button results__sort-button_desc" onClick={() => sortMovies(results, 'desc')}>Sort DESC</button> */}
+        <input className="search__input" type="text" 
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        
+      </section>
+      <ul className="results">
+        {results.map((result) => (
+          <li className="results__item" key={result.id}>
+            <p className="results__rating">Rating<span className="results__score">{result.vote_average}</span></p>
+            {result.poster_path ? <img className="results__image" loading="lazy" src={`https://image.tmdb.org/t/p/w200/${result.poster_path}`} alt={result.title} /> : <div className="results__placeholder"></div>}
+            <p className="results__title">{result.title}<span className="results__count">{result.vote_count} votes</span> </p>
+            {/* <p className="results__year">{result.release_date.slice(0,4)}</p> */}
+          </li>
+        )
+        )}
+      </ul>
+    </main>
   )
 }
 
