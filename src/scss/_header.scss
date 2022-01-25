@@ -45,8 +45,25 @@
         @include mixins.default-grid;
 
         &__list{
+            margin-top: 7.5rem;
             @include mixins.default-grid;
+            grid-auto-rows: 3.25rem;
             justify-content: right;
+            font-size: 1.5rem;
+        }
+
+        &__item{
+            display: flex;
+            justify-content: right;
+            padding-right: 3rem;
+        }
+
+        &__link{
+            color: black;
+
+            &:hover{
+                text-decoration: underline;
+            }
         }
       
         &--open{
