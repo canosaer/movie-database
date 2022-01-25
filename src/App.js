@@ -26,11 +26,11 @@ function App() {
       <div className="App">
         <section className="header">
           <h1 className="header__heading">Movie Database</h1>
-          <aside className="menu" className={sidebarStyles}>
-            <ul className="menu__list">
-              <li className="menu__item"><a className="menu__link" href="">Home</a></li>
-              <li className="menu__item"><a className="menu__link" href="">Link1</a></li>
-              <li className="menu__item"><a className="menu__link" href="">Link2</a></li>
+          <aside className={sidebarStyles}>
+            <ul className="sidebar__list">
+              <li className="sidebar__item"><a className="sidebar__link" href="">Home</a></li>
+              <li className="sidebar__item"><a className="sidebar__link" href="">Link1</a></li>
+              <li className="sidebar__item"><a className="sidebar__link" href="">Link2</a></li>
             </ul>
           </aside>
           <div className={overlayStyles} onClick={() => setMenuOpen(!menuOpen)}></div>

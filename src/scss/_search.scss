@@ -28,7 +28,7 @@
         &__item{
             @include mixins.default-grid;
             grid-template-rows: 10rem;
-            grid-template-columns: 0.15fr 0.3fr 1fr;
+            grid-template-columns: 0.15fr minmax(7.5rem, 0.3fr) 1fr;
             grid-column: 2/3;
             width: 100%;
             justify-self: center;

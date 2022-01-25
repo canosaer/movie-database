@@ -44,10 +44,10 @@ body{
 }
 
 .App{
+  @include mixins.default-grid;
   width: 100%;
   max-width: 75rem;
   justify-self: center;
-  padding: 0 1.75rem;
 }
 
 

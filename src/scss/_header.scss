@@ -4,8 +4,10 @@
 
 .header{
     @include mixins.default-grid;
+    grid-template-columns: 0.15fr minmax(23.5rem, 1fr) 0.15fr;
 
     &__heading{
+        grid-column: 2/3;
         font-size: 2.25rem;
         justify-self: center;
         margin: 2rem 0 1.5rem;
@@ -13,9 +15,9 @@
     }
 
     .toggle{
-        position: fixed;
-        top: 2rem;
-        left: 2rem;
+        grid-column: 1/2;
+        grid-row: 1/-1;
+        place-self: center center;
         z-index:2;
         background: none;
         outline: none;
@@ -24,7 +26,7 @@
         border-radius: 0.2rem;
 
         &__bars{
-            font-size: 2rem;
+            font-size: 2.25rem;
         }
       }
       
@@ -40,6 +42,12 @@
         top: 0;
         z-index: 2;
         background: whitesmoke;
+        @include mixins.default-grid;
+
+        &__list{
+            @include mixins.default-grid;
+            justify-content: right;
+        }
       
         &--open{
           left: 0;
