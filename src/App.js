@@ -11,14 +11,6 @@ import {
 } from "react-router-dom";
 
 
-const apiStuff = {
-  key: '3bda19b2b236ce6c68da0751faba9abe',
-  base: 'https://api.themoviedb.org/3/',
-  search: 'search/movie',
-  params: '&language=en-US&page=1&include_adult=false'
-}
-
-
 function App() {
   const [menuOpen, setMenuOpen ] = useState(false);
 
@@ -58,7 +50,15 @@ const Link2Page = () => {
 }
 
 const SearchApp = () => {
-  const[searchTerm, setSearchTerm ] = useState('Search me!')
+
+  const apiStuff = {
+    key: '3bda19b2b236ce6c68da0751faba9abe',
+    base: 'https://api.themoviedb.org/3/',
+    search: 'search/movie',
+    params: '&language=en-US&page=1&include_adult=false'
+  }
+
+  const [searchTerm, setSearchTerm ] = useState('')
   const [results, setResults] = useState([])
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
 
@@ -110,8 +110,8 @@ const SearchApp = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      {results.map((result, i) => (
-        <figure key={`unique-${i}`}>
+      {results.map((result) => (
+        <figure key={result.id}>
             {result.poster_path ? <img src={`https://image.tmdb.org/t/p/w200/${result.poster_path}`} alt={result.title} /> : null}
             <figcaption>{result.title}</figcaption>
         </figure>
