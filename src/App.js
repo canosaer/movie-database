@@ -2,16 +2,11 @@ import React, {useEffect, useState} from 'react';
 import { useDebounce } from './utilities';
 import axios from 'axios';
 import './scss/App.scss';
-
-import { render } from "react-dom";
 import {
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 
 function App() {
   const [menuOpen, setMenuOpen ] = useState(false);
@@ -34,7 +29,7 @@ function App() {
             </ul>
           </aside>
           <div className={overlayStyles} onClick={() => setMenuOpen(!menuOpen)}></div>
-          <button className="toggle" onClick={() => setMenuOpen(!menuOpen)}><FontAwesomeIcon className="toggle__bars" icon="bars" /></button>
+          
         </section>
         <Routes>
           <Route path="/" element={<SearchApp />} />
