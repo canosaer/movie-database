@@ -52,7 +52,7 @@ const Link2Page = () => {
 const SearchApp = () => {
 
   const apiStuff = {
-    key: '3bda19b2b236ce6c68da0751faba9abe',
+    key: process.env.REACT_APP_API_KEY,
     base: 'https://api.themoviedb.org/3/',
     search: 'search/movie',
     params: '&language=en-US&page=1&include_adult=false'
